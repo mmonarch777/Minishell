@@ -17,22 +17,22 @@ LIBA   =   libft/libft.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBA)
-			$(CC) $(CFLAGS) $(OBJ) -Llibft -lft -lreadline -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJ) -Lminilib -lmini -lreadline -o $(NAME)
 			make clean
 
 %.o: %.c $(LIBA) $(HEADER)
 			$(CC) $(CFLAGS) -c -Iinclude $< -o $@
 
 $(LIBA):
-			make -C libft/
+			make -C minilib/
 
 clean:
 			rm -rf $(OBJ)
-			$(MAKE) clean -C libft
+			$(MAKE) clean -C minilib
 
 fclean:		clean
 			rm -rf $(NAME)
-			$(MAKE) fclean -C libft
+			$(MAKE) fclean -C minilib
 
 re:			fclean all
 
