@@ -1,6 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "../minilib//libft.h"
+# include "../libmini//libft.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -46,6 +46,7 @@ typedef struct s_shell
     int         fd1;
     int         fd2;
     t_env       *environment;
+    t_env       *head_env;
     t_command   *lstcom;
     int         status_last_command;
 }   t_shell;
@@ -74,15 +75,20 @@ int     split_here_document(t_shell *mshell, int *i);
 void    free_here_document(t_shell *mshell);
 int     one_quote(t_shell *mshell, int *i);
 int     two_quote(t_shell *mshell, int *i);
-void    change_signal(void);
+void    chenge_signal(void);
+void    comply_com(t_shell *mshell);
 void    wait_fork(t_shell *mshell);
 int     error_pid(t_shell *mshell);
 int     my_pwd(t_shell *mshell);
 int     my_echo(t_shell *mshell);
 int     my_cd(t_shell *mshell);
-int     error_cd_dont_set(t_shell *mshell, char *oldpwd);
+int     error_set_pwd(t_shell *mshell, char *pwd);
 int     error_getcwd(t_shell *mshell);
 int     error_directory(t_shell *mshell, char **old);
-void    change_value_pwd(t_shell *mshell, char **value, char *key);
+void    chenge_value_pwd(t_shell *mshell, char **value, char *key);
+void    check_oldpwd_env(t_shell *mshell);
+char    *home_pwd(t_shell *mshell);
+int     error_too_many_arguments(t_shell *mshell);
+int     my_env(t_shell *mshell);
 
 #endif

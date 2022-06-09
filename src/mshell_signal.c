@@ -10,7 +10,7 @@ void	ctrl_c(int number_sig)
 
 }
 
-void    change_signal(void)
+void    chenge_signal(void)
 {
     signal(SIGINT, ctrl_c);
     signal(SIGQUIT, SIG_IGN);

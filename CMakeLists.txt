@@ -8,10 +8,10 @@ file(GLOB
 
 include_directories(./include)
 
-link_directories(${CMAKE_SOURCE_DIR}/libft)
+link_directories(${CMAKE_SOURCE_DIR}/libmini)
 
 link_directories(/usr/lib/x86_64-linux-gnu)
 
 add_executable(minishell ${FC})
 
-target_link_libraries(${PROJECT_NAME} ft readline)
+target_link_libraries(${PROJECT_NAME} mini readline)

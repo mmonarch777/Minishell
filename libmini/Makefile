@@ -9,7 +9,7 @@
 #    Updated: 2021/04/30 14:01:45 by mmonarch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME = libft.a
+NAME = libmini.a
 
 SRC =	ft_memset.c		ft_isalpha.c	ft_bzero.c\
 		ft_memcpy.c		ft_memccpy.c	ft_memmove.c\
@@ -38,6 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $?
+	make clean
 
 %.o: %.c
 	gcc $(FLAGS) -c $< -o $@

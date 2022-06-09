@@ -9,6 +9,7 @@ t_command   *new_command(void)
     new->token = 0;
     new->output_file = NULL;
     new->input_file = NULL;
+    new->here_document = NULL;
     new->head = new;
     new->next = NULL;
     new->command = NULL;

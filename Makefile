@@ -5,34 +5,34 @@ SRC    =	src/minishell.c		src/env.c					src/env_list.c		src/mshell_error.c\
 			src/parser_token.c	src/check_syntax_input.c	src/mshell_utils.c 	src/parser_split.c\
 			src/parser_quote.c	src/mshell_signal.c			src/comply_com.c	src/command_pwd.c\
 			src/command_echo.c	src/command_error.c			src/command_cd.c	src/command_cd_utils.c\
-
+			src/command_env.c
 
 OBJ    =	$(SRC:.c=.o)
 HEADER =	include/minishell.h
 CC     =	gcc
 #CFLAGS =	-Wall -Wextra -Werror
-LIBA   =   libft/libft.a
+LIBA   =   libmini/libmini.a
 
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBA)
-			$(CC) $(CFLAGS) $(OBJ) -Lminilib -lmini -lreadline -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJ) -Llibmini -lmini -lreadline -o $(NAME)
 			make clean
 
 %.o: %.c $(LIBA) $(HEADER)
 			$(CC) $(CFLAGS) -c -Iinclude $< -o $@
 
 $(LIBA):
-			make -C minilib/
+			make -C libmini/
 
 clean:
 			rm -rf $(OBJ)
-			$(MAKE) clean -C minilib
+			$(MAKE) clean -C libmini
 
 fclean:		clean
 			rm -rf $(NAME)
-			$(MAKE) fclean -C minilib
+			$(MAKE) fclean -C libmini
 
 re:			fclean all
 

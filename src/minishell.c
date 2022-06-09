@@ -45,7 +45,7 @@ void    init_mshell(t_shell *mshell)
     mshell->time_input = NULL;
     mshell->status_last_command = 0;
     mshell->have_pipe = 0;
-    change_signal();
+    chenge_signal();
 }
 
 int main(int argc, char **argv, char **env)
@@ -65,7 +65,7 @@ int main(int argc, char **argv, char **env)
             continue ;
         add_history(mshell.input);
         if (!parser_input(&mshell, 0))
-//            comply_com(&mshell);
+            comply_com(&mshell);
         clear_mshell(&mshell);
     }
 }
