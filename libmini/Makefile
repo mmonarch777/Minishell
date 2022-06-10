@@ -23,14 +23,12 @@ SRC =	ft_memset.c		ft_isalpha.c	ft_bzero.c\
 		ft_strjoin.c	ft_itoa.c		ft_strtrim.c\
 		ft_strmapi.c	ft_putchar_fd.c	ft_putendl_fd.c\
 		ft_putnbr_fd.c	ft_putstr_fd.c	ft_split.c\
-		ft_strcmp.c		ft_is_big_alpha.c	ft_is_low_alpha.c
-
-SRC_B = ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c\
+		ft_strcmp.c		ft_is_big_alpha.c	ft_is_low_alpha.c\
+		ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c\
 		ft_lstlast.c	ft_lstadd_back.c	ft_lstdelone.c\
 		ft_lstclear.c	ft_lstiter.c		ft_lstmap.c
 
 OBJ =	$(patsubst %.c,%.o,$(SRC))
-OBJ_B = $(patsubst %.c,%.o,$(SRC_B))
 
 FLAGS =	-Wall -Werror -Wextra
 
@@ -43,11 +41,8 @@ $(NAME): $(OBJ)
 %.o: %.c
 	gcc $(FLAGS) -c $< -o $@
 
-bonus: $(OBJ_B)
-	ar rcs $(NAME) $?
-
 clean:
-	rm -f $(OBJ) $(OBJ_B)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

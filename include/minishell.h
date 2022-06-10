@@ -7,6 +7,8 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/errno.h>
+# include <sys/stat.h>
 
 # define PIPE                   1
 # define REDIRECT_OUT           2
@@ -80,6 +82,7 @@ int     one_quote(t_shell *mshell, int *i);
 int     two_quote(t_shell *mshell, int *i);
 void    chenge_signal(void);
 void    comply_com(t_shell *mshell);
+int     comply_with_pipe(t_shell *mshell);
 void    wait_fork(t_shell *mshell);
 int     error_pid(t_shell *mshell);
 int     my_pwd(t_shell *mshell);
@@ -99,5 +102,10 @@ int     check_equals(char *env, char r);
 int     error_valid(t_shell *mshell, char *mass);
 int     my_unset(t_shell *mshell);
 int     my_exit(t_shell *mshell);
+int     comply_without_pipe(t_shell *mshell);
+int     my_com(t_shell *mshell);
+char	*prog_name(t_shell *mshell);
+char	**new_arr_env(t_shell *mshell);
+int     error_execve(t_shell *mshell);
 
 #endif

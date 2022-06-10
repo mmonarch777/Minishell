@@ -32,49 +32,32 @@ void    close_fd(t_shell *mshell)
     }
 }
 
-//int comply_with_pipe(t_shell *mshell)
-//{
-//    pid_t   pid;
-//
-//    pid = fork();
-//    if (pid == 0)
-//    {
-//        if (mshell->lstcom->token == PIPE && !mshell->lstcom->output_file)
-//        {
-//            dup2(mshell->lstcom->fd_pipe[1], 1);
-//            close(mshell->lstcom->fd_pipe[0]);
-//        }
-//        if (mshell->lstcom->input_file)
-//            if (dup2(mshell->lstcom->fd_in_file, 0) == -1)
-//                exit(1);
-//        if (mshell_exec(mshell))
-//            exit(mshell->status_last_command);
-//        else if (execve())
-//            ;
-//        exit(mshell->status_last_command);
-//    }
-//    if (pid == -1)
-//        return (error_pid(mshell));
-//    wait_fork(mshell);
-//    return (0);
-//}
-
-int comply_without_pipe(t_shell *mshell)
+int comply_with_pipe(t_shell *mshell)
 {
-    if (!my_pwd(mshell))
-        return (0);
-    else if (!my_echo(mshell))
-        return (0);
-    else if (!my_cd(mshell))
-        return (0);
-    else if (!my_env(mshell))
-        return (0);
-    else if (!my_export(mshell))
-        return (0);
-    else if (!my_unset(mshell))
-        return (0);
-    else if (!my_exit(mshell))
-        return (0);
+    pid_t   pid;
+
+    pid = fork();
+    if (pid == 0)
+    {
+        if (mshell->lstcom->token == PIPE && !mshell->lstcom->output_file)
+        {
+            dup2(mshell->lstcom->fd_pipe[1], 1);
+            close(mshell->lstcom->fd_pipe[0]);
+        }
+        if (mshell->lstcom->input_file)
+            if (dup2(mshell->lstcom->fd_in_file, 0) == -1)
+                exit(1);
+        if (!my_com(mshell))
+            exit(mshell->status_last_command);
+        else if (execve(prog_name(mshell), mshell->lstcom->command,
+                        new_arr_env(mshell)) == -1)
+            error_execve(mshell);
+        exit(mshell->status_last_command);
+    }
+    if (pid == -1)
+        return (error_pid(mshell));
+    wait_fork(mshell);
+    return (0);
 }
 
 void    comply(t_shell *mshell)
@@ -86,7 +69,7 @@ void    comply(t_shell *mshell)
             break;
         if (mshell->have_pipe && mshell->lstcom->command)
         {
-//            if (comply_with_pipe(mshell))
+            if (comply_with_pipe(mshell))
                 break;
         }
         else if (mshell->lstcom->command)
