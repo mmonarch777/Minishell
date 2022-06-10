@@ -23,6 +23,8 @@ typedef struct s_list
 
 void	*ft_memset(void *mass, int a, size_t b);
 int		ft_isalpha(int a);
+int     ft_is_big_alpha(int a);
+int     ft_is_low_alpha(int a);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *last, const void *mass, size_t n);
 void	*ft_memccpy(void *dast, const void *cat, int c, size_t n);

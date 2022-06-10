@@ -66,6 +66,6 @@ int main(int argc, char **argv, char **env)
         add_history(mshell.input);
         if (!parser_input(&mshell, 0))
             comply_com(&mshell);
-        clear_mshell(&mshell);
+        clear_mshell(&mshell, 0);
     }
 }

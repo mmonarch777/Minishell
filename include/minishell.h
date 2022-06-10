@@ -18,6 +18,8 @@ typedef struct s_env
 {
     char            *key;
     char            *value;
+    int             flag;
+    int             equals;
     struct s_env    *next;
 }   t_env;
 
@@ -53,12 +55,13 @@ typedef struct s_shell
 
 void    init_mshell(t_shell *mshell);
 void    get_env(char **env, t_shell *mshell);
+char	**split_for_env(const char *s, char c);
 int     check_mshell_input(char *str);
 void    cleaning(char **mass);
-void    add_env(t_shell *mshell, char **mass);
+void    add_env(t_shell *mshell, char **mass, int equals);
 void    eof_input(void);
 int     check_syntax_input(t_shell *mshell, int n);
-void    clear_mshell(t_shell *mshell);
+void    clear_mshell(t_shell *mshell, int i);
 int     syntax_error(t_shell *mshell, char symbol);
 int     split_input(t_shell *msell, int *i);
 void    add_command(t_shell *mshell);
@@ -90,5 +93,8 @@ void    check_oldpwd_env(t_shell *mshell);
 char    *home_pwd(t_shell *mshell);
 int     error_too_many_arguments(t_shell *mshell);
 int     my_env(t_shell *mshell);
+int     my_export(t_shell *mshell);
+int     add_to_env(t_shell *mshell);
+int     check_equals(char *env, char r);
 
 #endif

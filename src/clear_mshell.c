@@ -1,11 +1,23 @@
 #include "minishell.h"
 
-void    clear_mshell(t_shell *mshell)
+void    chenge_flag_env(t_shell *mshell)
+{
+    t_env   *env;
+
+    env = mshell->environment;
+    while (env)
+    {
+        env->flag = 0;
+        env = env->next;
+    }
+}
+
+void    clear_mshell(t_shell *mshell, int i)
 {
     t_command   *command;
-    int		i;
 
-    mshell->lstcom = mshell->lstcom->head;
+    if (mshell->lstcom != NULL)
+        mshell->lstcom = mshell->lstcom->head;
     while (mshell->lstcom)
     {
         i = 0;
@@ -25,4 +37,5 @@ void    clear_mshell(t_shell *mshell)
         free(command);
     }
     mshell->have_pipe = 0;
+    chenge_flag_env(mshell);
 }

@@ -30,7 +30,7 @@ void    check_oldpwd_env(t_shell *mshell)
         env = env->next;
     }
     mass = ft_split("OLDPWD=", '=');
-    add_env(mshell, mass);
+    add_env(mshell, mass, 0);
     free(mass);
 }
 
