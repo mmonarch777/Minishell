@@ -71,6 +71,8 @@ int comply_without_pipe(t_shell *mshell)
         return (0);
     else if (!my_export(mshell))
         return (0);
+    else if (!my_unset(mshell))
+        return (0);
 }
 
 void    comply(t_shell *mshell)

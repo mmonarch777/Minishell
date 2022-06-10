@@ -96,5 +96,7 @@ int     my_env(t_shell *mshell);
 int     my_export(t_shell *mshell);
 int     add_to_env(t_shell *mshell);
 int     check_equals(char *env, char r);
+int     error_valid(t_shell *mshell, char *mass);
+int     my_unset(t_shell *mshell);
 
 #endif

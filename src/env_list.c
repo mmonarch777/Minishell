@@ -48,6 +48,7 @@ void    add_env(t_shell *mshell, char **mass, int equals)
     if (mshell->environment == NULL)
     {
         mshell->environment = new_env();
+        mshell->head_env = mshell->environment;
         add_key(&mshell->environment, mass, equals);
         return ;
     }

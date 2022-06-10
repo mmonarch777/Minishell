@@ -2,7 +2,12 @@
 
 int error_valid(t_shell *mshell, char *mass)
 {
-    write(2, "minishell: export: `", 21);
+    char *command;
+
+    command = mshell->lstcom->command[0];
+    write(2, "minishell: ", 11);
+    write(2, command,ft_strlen(command));
+    write(2, ": `", 3);
     write(2, mass, ft_strlen(mass));
     write(2, "': not a valid identifier\n", 26);
     mshell->status_last_command = 1;
@@ -12,10 +17,18 @@ int error_valid(t_shell *mshell, char *mass)
 int check_dup_and_valid(t_shell *mshell, char *mass)
 {
     t_env   *env;
+    int     i;
 
     env = mshell->environment;
-    if (!(ft_isalpha(*mass) || *mass == '_'))
-        return (error_valid(mshell, mass));
+    i = 0;
+    while (mass[i] != '\0')
+    {
+        if (i == 0 && !(ft_isalpha(mass[i]) || mass[i] == '_'))
+            return (error_valid(mshell, mass));
+        if (!(ft_isalnum(mass[i]) || mass[i] == '_') && i != 0)
+            return (error_valid(mshell, mass));
+        ++i;
+    }
     while (env)
     {
         if (!ft_strcmp(env->key, mass))

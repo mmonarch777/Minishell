@@ -81,6 +81,7 @@ int my_export(t_shell *mshell)
 {
     if (!ft_strcmp(mshell->lstcom->command[0], "export"))
     {
+        mshell->status_last_command = 0;
         if (mshell->lstcom->command[1] == NULL)
             return (sort_and_print_env(mshell));
         else
