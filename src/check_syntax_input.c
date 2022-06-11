@@ -13,6 +13,7 @@ int check_syntax_redir_out(t_shell *mshell, int *n)
         if (mshell->input[*n] == '\0' || mshell->input[*n] == '>'
             || mshell->input[*n] == '<' || mshell->input[*n] == '|')
             return (syntax_error(mshell, mshell->input[*n]));
+        --(*n);
     }
     return (0);
 }
@@ -30,6 +31,7 @@ int check_syntax_redir_in(t_shell *mshell, int *n)
         if (mshell->input[*n] == '\0' || mshell->input[*n] == '>'
             || mshell->input[*n] == '<' || mshell->input[*n] == '|')
             return (syntax_error(mshell, mshell->input[*n]));
+        --(*n);
     }
     return (0);
 }
@@ -38,10 +40,10 @@ int check_syntax_pipe(t_shell *mshell, int *n)
 {
     if (mshell->input[*n] == '|')
     {
-        ++*n;
+        ++(*n);
         while ((mshell->input[*n] == ' ' || mshell->input[*n] == '\t')
                && mshell->input[*n] != '\0')
-            ++n;
+            ++(*n);
         if (mshell->input[*n] == '|')
             return (syntax_error(mshell, mshell->input[*n]));
         if (mshell->input[*n] == '\0')
@@ -51,6 +53,7 @@ int check_syntax_pipe(t_shell *mshell, int *n)
             else
                 return (2);
         }
+        --(*n);
     }
     return (0);
 }

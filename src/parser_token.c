@@ -7,15 +7,14 @@ int parser_pipe(t_shell *mshell, int *i)
     if (*i != 0)
         expand_com(mshell, i);
     mshell->lstcom->token = PIPE;
+    add_command(mshell);
     ++(*i);
     while ((mshell->input[*i] == ' ' || mshell->input[*i] == '\t')
-        && mshell->input[*i]) {
+        && mshell->input[*i] != '\0')
         ++(*i);
-    }
     buf = ft_strdup(mshell->input + *i);
     free(mshell->input);
     mshell->input = buf;
-    add_command(mshell);
     mshell->have_pipe = 1;
     *i = -1;
     return (0);

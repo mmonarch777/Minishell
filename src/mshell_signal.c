@@ -10,6 +10,15 @@ void	ctrl_c(int number_sig)
 
 }
 
+void	ctrl_c2(int sig)
+{
+    (void)sig;
+    write(2, "\n", 1);
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    errno = 1;
+}
+
 void    chenge_signal(void)
 {
     signal(SIGINT, ctrl_c);

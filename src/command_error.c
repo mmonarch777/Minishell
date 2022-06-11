@@ -33,29 +33,25 @@ int error_too_many_arguments(t_shell *mshell)
     return (0);
 }
 
-int	error_execve(t_shell *mshell)
+int	error_execve(t_shell *mshell, char *com)
 {
     struct stat buff;
 
-    if (!stat(mshell->lstcom->command[0], &buff) && S_ISDIR(buff.st_mode))
+    if (!stat(com, &buff) && S_ISDIR(buff.st_mode))
     {
-        ft_putstr_fd("minishell: ", 2);
-        ft_putstr_fd(mshell->lstcom->command[0], 2);
+        ft_putstr_fd(com, 2);
         ft_putendl_fd(": is a directory", 2);
         exit (126);
     }
-    else if (ft_strncmp(mshell->lstcom->command[0], "./", 2) == 0
-             || ft_strncmp(mshell->lstcom->command[0], "../", 3) == 0
-             || ft_strncmp(mshell->lstcom->command[0], "/", 1) == 0)
+    else if (ft_strncmp(com, "./", 2) == 0 || ft_strncmp(com, "../", 3) == 0
+        || ft_strncmp(com, "/", 1) == 0)
     {
-        ft_putstr_fd("minishell: ", 2);
-        perror(mshell->lstcom->command[0]);
+        perror(com);
         if (errno == 13)
             exit (126);
         exit (127);
     }
-    ft_putstr_fd("minishell: ", 2);
-    ft_putstr_fd(mshell->lstcom->command[0], 2);
+    ft_putstr_fd(com, 2);
     ft_putendl_fd(": command not found", 2);
     exit(127);
 }

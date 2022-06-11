@@ -70,6 +70,8 @@ void    add_command(t_shell *mshell);
 void    expand_com(t_shell *mshell, int *i);
 int     parser(char symbol, int *i, t_shell *mshell);
 int     check_dollar(t_shell *mshell, int *i);
+void	ctrl_c(int number_sig);
+void	ctrl_c2(int number_sig);
 int     check_input(t_shell *mshell);
 int     chenge_input(t_shell *mshell, int *n);
 int     parser_token(char symbol, int *i, t_shell *mshell);
@@ -106,6 +108,6 @@ int     comply_without_pipe(t_shell *mshell);
 int     my_com(t_shell *mshell);
 char	*prog_name(t_shell *mshell);
 char	**new_arr_env(t_shell *mshell);
-int     error_execve(t_shell *mshell);
+int     error_execve(t_shell *mshell, char *com);
 
 #endif

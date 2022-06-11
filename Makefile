@@ -19,9 +19,8 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBA)
 			$(CC) $(CFLAGS) $(OBJ) -Llibmini -lmini -lreadline -o $(NAME)
-			make clean
 
-%.o: %.c $(LIBA) $(HEADER)
+%.o: %.c  $(LIBA) $(HEADER)
 			$(CC) $(CFLAGS) -c -Iinclude $< -o $@
 
 $(LIBA):

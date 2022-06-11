@@ -54,11 +54,13 @@ int main(int argc, char **argv, char **env)
 
     init_mshell(&mshell);
     get_env(env, &mshell);
+    rl_outstream = stderr;
     while (1)
     {
         if (mshell.input)
             free(mshell.input);
-        mshell.input = readline("minishell$ ");
+        signal(SIGINT, ctrl_c2);
+        mshell.input = readline("\e[0;32mminishell$\e[0;39m ");
         if (!mshell.input)
             eof_input();
         if (!check_mshell_input(mshell.input))

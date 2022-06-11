@@ -22,13 +22,16 @@ void    close_fd(t_shell *mshell)
         close(mshell->lstcom->fd_in_file);
     if (mshell->lstcom->here_document != NULL)
         close(mshell->lstcom->fd_here_document[0]);
-    dup2(mshell->fd0, 0);
-    dup2(mshell->fd1, 1);
-    dup2(mshell->fd2, 2);
     if (mshell->lstcom->token == PIPE)
     {
         dup2(mshell->lstcom->fd_pipe[0], 0);
         close (mshell->lstcom->fd_pipe[1]);
+    }
+    else
+    {
+        dup2(mshell->fd0, 0);
+        dup2(mshell->fd1, 1);
+        dup2(mshell->fd2, 2);
     }
 }
 
@@ -51,7 +54,7 @@ int comply_with_pipe(t_shell *mshell)
             exit(mshell->status_last_command);
         else if (execve(prog_name(mshell), mshell->lstcom->command,
                         new_arr_env(mshell)) == -1)
-            error_execve(mshell);
+            error_execve(mshell, mshell->lstcom->command[0]);
         exit(mshell->status_last_command);
     }
     if (pid == -1)
