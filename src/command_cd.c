@@ -37,7 +37,7 @@ int swap_pwd(t_shell *mshell)
     chenge_value_pwd(mshell, &new, "OLDPWD");
     chenge_value_pwd(mshell, &old, "PWD");
     ft_putendl_fd(old, 1);
-    mshell->status_last_command = 0;
+    last_exit_status = 0;
     return (0);
 }
 
@@ -61,7 +61,7 @@ int get_home_pwd(t_shell *mshell)
     check_oldpwd_env(mshell);
     chenge_value_pwd(mshell, &old, "OLDPWD");
     chenge_value_pwd(mshell, &home, "PWD");
-    mshell->status_last_command = 0;
+    last_exit_status = 0;
     return (0);
 }
 
@@ -84,7 +84,7 @@ int chenge_pwd(t_shell *mshell)
     check_oldpwd_env(mshell);
     chenge_value_pwd(mshell, &old, "OLDPWD");
     chenge_value_pwd(mshell, &new, "PWD");
-    mshell->status_last_command = 0;
+    last_exit_status = 0;
     return (0);
 }
 
@@ -94,11 +94,11 @@ int my_cd(t_shell *mshell)
     {
         if (mshell->lstcom->command[2] != NULL)
             return (error_too_many_arguments(mshell));
-        if (!strcmp("-", mshell->lstcom->command[1]))
-            return (swap_pwd(mshell));
-        else if (!ft_strcmp("~", mshell->lstcom->command[1]) ||
-            mshell->lstcom->command[1] == NULL)
+        if ((mshell->lstcom->command[1] == NULL) ||
+            !ft_strcmp("~", mshell->lstcom->command[1]))
             return (get_home_pwd(mshell));
+        else if (!strcmp("-", mshell->lstcom->command[1]))
+            return (swap_pwd(mshell));
         else
             return chenge_pwd(mshell);
     }

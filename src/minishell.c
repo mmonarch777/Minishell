@@ -43,8 +43,8 @@ void    init_mshell(t_shell *mshell)
     mshell->lstcom = NULL;
     mshell->input = NULL;
     mshell->time_input = NULL;
-    mshell->status_last_command = 0;
     mshell->have_pipe = 0;
+    last_exit_status = 0;
     chenge_signal();
 }
 
@@ -59,7 +59,7 @@ int main(int argc, char **argv, char **env)
     {
         if (mshell.input)
             free(mshell.input);
-        signal(SIGINT, ctrl_c2);
+        signal(SIGINT, ctrl_c);
         mshell.input = readline("\e[0;32mminishell$\e[0;39m ");
         if (!mshell.input)
             eof_input();

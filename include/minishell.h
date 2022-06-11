@@ -16,6 +16,8 @@
 # define REDIRECT_IN            4
 # define HERE_DOCUMENT          5
 
+int last_exit_status;
+
 typedef struct s_env
 {
     char            *key;
@@ -52,7 +54,6 @@ typedef struct s_shell
     t_env       *environment;
     t_env       *head_env;
     t_command   *lstcom;
-    int         status_last_command;
 }   t_shell;
 
 void    init_mshell(t_shell *mshell);
@@ -108,6 +109,6 @@ int     comply_without_pipe(t_shell *mshell);
 int     my_com(t_shell *mshell);
 char	*prog_name(t_shell *mshell);
 char	**new_arr_env(t_shell *mshell);
-int     error_execve(t_shell *mshell, char *com);
+void    error_execve(t_shell *mshell, char *com);
 
 #endif

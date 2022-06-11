@@ -19,10 +19,11 @@ void    add_key(t_env **envt, char **mass, int equals)
 {
     (*envt)->key = mass[0];
     (*envt)->equals = equals;
-    if (!mass[1])
-        (*envt)->value = "";
-    else
-        (*envt)->value = mass[1];
+    (*envt)->value = mass[1];
+//    if (!mass[1])
+//        (*envt)->value = "";
+//    else
+//        (*envt)->value = mass[1];
 }
 
 void    chenge_shlvl(char **mass)

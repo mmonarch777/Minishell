@@ -9,7 +9,7 @@ int open_fd(t_shell *mshell)
         if (dup2(mshell->lstcom->fd_out_file, 1) == -1)
             return (object_error(mshell, "dup2"));
     if (mshell->lstcom->here_document != NULL)
-        if (dup2(mshell->lstcom->here_document[0], 0) == -1)
+        if (dup2(mshell->lstcom->fd_here_document[0], 0) == -1)
             return (object_error(mshell, "dup2"));
     return (0);
 }
@@ -51,11 +51,11 @@ int comply_with_pipe(t_shell *mshell)
             if (dup2(mshell->lstcom->fd_in_file, 0) == -1)
                 exit(1);
         if (!my_com(mshell))
-            exit(mshell->status_last_command);
+            exit(last_exit_status);
         else if (execve(prog_name(mshell), mshell->lstcom->command,
                         new_arr_env(mshell)) == -1)
             error_execve(mshell, mshell->lstcom->command[0]);
-        exit(mshell->status_last_command);
+        exit(last_exit_status);
     }
     if (pid == -1)
         return (error_pid(mshell));
@@ -81,7 +81,7 @@ void    comply(t_shell *mshell)
                 break;
         }
         close_fd(mshell);
-        if (mshell->status_last_command != 0 ||
+        if (last_exit_status!= 0 ||
             mshell->lstcom->next == NULL)
             break;
         mshell->lstcom = mshell->lstcom->next;
@@ -93,6 +93,7 @@ void    comply_com(t_shell *mshell)
     mshell->fd0 = dup(0);
     mshell->fd1 = dup(1);
     mshell->fd2 = dup(2);
+    signal(SIGINT, ctrl_c2);
     comply(mshell);
     close(mshell->fd0);
     close(mshell->fd1);

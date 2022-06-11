@@ -8,7 +8,7 @@ int exit_status_last_command(t_shell *mshell, int num, int *i)
     char *mass;
 
     mass = ft_substr(mshell->input, 0, num);
-    mass1 = ft_itoa(mshell->status_last_command);
+    mass1 = ft_itoa(last_exit_status);
     mass2 = ft_strdup(mshell->input + *i + 1);
     mass3 = ft_strjoin(mass, mass1);
     free(mass);

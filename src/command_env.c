@@ -19,7 +19,7 @@ int my_env(t_shell *mshell)
             }
             env = env->next;
         }
-        mshell->status_last_command = 0;
+        last_exit_status = 0;
         return (0);
     }
     return (1);

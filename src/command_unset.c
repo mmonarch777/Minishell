@@ -76,7 +76,7 @@ int my_unset(t_shell *mshell)
 {
     if (!strcmp(mshell->lstcom->command[0], "unset"))
     {
-        mshell->status_last_command = 0;
+        last_exit_status = 0;
         if (mshell->lstcom->command[1] != NULL)
             delite_env(mshell, mshell->lstcom->command);
         return (0);

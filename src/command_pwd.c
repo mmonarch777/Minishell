@@ -10,7 +10,7 @@ int my_pwd(t_shell *mshell)
         write(1, mass, ft_strlen(mass));
         write(1, "\n", 1);
         free(mass);
-        mshell->status_last_command = 0;
+        last_exit_status = 0;
         return (0);
     }
     return (1);

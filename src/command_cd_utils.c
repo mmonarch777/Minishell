@@ -9,7 +9,8 @@ void    chenge_value_pwd(t_shell *mshell, char **value, char *key)
     {
         if (!ft_strcmp(key, env->key))
         {
-            free(env->value);
+            if (env->value != NULL)
+                free(env->value);
             env->value = *value;
             break;
         }

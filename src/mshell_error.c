@@ -10,7 +10,7 @@ int syntax_error(t_shell *mshell, char symbol)
         write(2, &symbol, 1);
     }
     write(2, "'\n", 2);
-    mshell->status_last_command = 2;
+    last_exit_status = 2;
     if (mshell->time_input)
         free(mshell->time_input);
     return (1);
@@ -20,7 +20,7 @@ int	object_error(t_shell *mshell, char *object_error)
 {
     write(2, "minishell: ", 11);
     perror(object_error);
-    mshell->status_last_command = 1;
+    last_exit_status = 1;
     return (1);
 }
 

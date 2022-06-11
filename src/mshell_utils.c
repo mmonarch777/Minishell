@@ -24,6 +24,11 @@ void    wait_fork(t_shell *mshell)
     int status;
 
     status = 0;
-    waitpid(-1, &status, 0);
-    mshell->status_last_command = status;
+    waitpid(WAIT_ANY, &status, 0);
+    if (WIFSIGNALED(status))
+        last_exit_status = WTERMSIG(status) + 128;
+    else if (WIFEXITED(status))
+        last_exit_status = WEXITSTATUS(status);
+    else
+        last_exit_status = status;
 }

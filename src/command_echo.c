@@ -21,12 +21,15 @@ int my_echo(t_shell *mshell)
     i = 1;
     if (!ft_strcmp("echo", mshell->lstcom->command[0]))
     {
-        if (!ft_strcmp("-n", mshell->lstcom->command[1]))
-            i = 2;
-        print_with_n(mshell, i);
+        if (mshell->lstcom->command[i] != NULL)
+        {
+            if (!ft_strcmp("-n", mshell->lstcom->command[1]))
+                i = 2;
+            print_with_n(mshell, i);
+        }
         if (i == 1)
             write(1, "\n", 1);
-        mshell->status_last_command = 0;
+        last_exit_status = 0;
         return (0);
     }
     return (1);

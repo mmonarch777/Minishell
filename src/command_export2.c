@@ -10,7 +10,7 @@ int error_valid(t_shell *mshell, char *mass)
     write(2, ": `", 3);
     write(2, mass, ft_strlen(mass));
     write(2, "': not a valid identifier\n", 26);
-    mshell->status_last_command = 1;
+    last_exit_status = 1;
     return (1);
 }
 
@@ -23,9 +23,12 @@ int check_dup_and_valid(t_shell *mshell, char *mass)
     i = 0;
     while (mass[i] != '\0')
     {
-        if (i == 0 && !(ft_isalpha(mass[i]) || mass[i] == '_'))
-            return (error_valid(mshell, mass));
-        if (!(ft_isalnum(mass[i]) || mass[i] == '_') && i != 0)
+        if (i == 0)
+        {
+            if (!(ft_isalpha(mass[i]) || mass[i] == '_'))
+                return (error_valid(mshell, mass));
+        }
+        else if (!(ft_isalnum(mass[i]) || mass[i] == '_' || mass[i] == '='))
             return (error_valid(mshell, mass));
         ++i;
     }
