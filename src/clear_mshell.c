@@ -1,41 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clear_mshell.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/11 18:59:00 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/11 19:05:54 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void    chenge_flag_env(t_shell *mshell)
+void	chenge_flag_env(t_shell *mshell)
 {
-    t_env   *env;
+	t_env	*env;
 
-    env = mshell->environment;
-    while (env)
-    {
-        env->flag = 0;
-        env = env->next;
-    }
+	env = mshell->environment;
+	while (env)
+	{
+		env->flag = 0;
+		env = env->next;
+	}
 }
 
-void    clear_mshell(t_shell *mshell, int i)
+void	clear_mshell(t_shell *mshell, int i)
 {
-    t_command   *command;
+	t_command	*command;
 
-    if (mshell->lstcom != NULL)
-        mshell->lstcom = mshell->lstcom->head;
-    while (mshell->lstcom)
-    {
-        i = 0;
-        while (mshell->lstcom->command && mshell->lstcom->command[i])
-            free(mshell->lstcom->command[i++]);
-        free(mshell->lstcom->command);
-        if (mshell->lstcom->output_file != NULL)
-            free(mshell->lstcom->output_file);
-        if (mshell->lstcom->input_file != NULL)
-            free(mshell->lstcom->input_file);
-        if (mshell->lstcom->here_document != NULL)
-            free(mshell->lstcom->here_document);
-        if (mshell->lstcom->token == PIPE && mshell->lstcom->fd_pipe[0] != 0)
-            close(mshell->lstcom->fd_pipe[0]);
-        command = mshell->lstcom;
-        mshell->lstcom = mshell->lstcom->next;
-        free(command);
-    }
-    mshell->have_pipe = 0;
-    chenge_flag_env(mshell);
+	if (mshell->lstcom != NULL)
+		mshell->lstcom = mshell->lstcom->head;
+	while (mshell->lstcom)
+	{
+		i = 0;
+		while (mshell->lstcom->command && mshell->lstcom->command[i])
+			free(mshell->lstcom->command[i++]);
+		free(mshell->lstcom->command);
+		if (mshell->lstcom->output_file != NULL)
+			free(mshell->lstcom->output_file);
+		if (mshell->lstcom->input_file != NULL)
+			free(mshell->lstcom->input_file);
+		if (mshell->lstcom->here_document != NULL)
+			free(mshell->lstcom->here_document);
+		if (mshell->lstcom->token == PIPE && mshell->lstcom->fd_pipe[0] != 0)
+			close(mshell->lstcom->fd_pipe[0]);
+		command = mshell->lstcom;
+		mshell->lstcom = mshell->lstcom->next;
+		free(command);
+	}
+	mshell->have_pipe = 0;
+	chenge_flag_env(mshell);
 }

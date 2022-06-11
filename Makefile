@@ -20,6 +20,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ) $(LIBA)
 			$(CC) $(CFLAGS) $(OBJ) -Llibmini -lmini -lreadline -o $(NAME)
 
+
 %.o: %.c  $(LIBA) $(HEADER)
 			$(CC) $(CFLAGS) -c -Iinclude $< -o $@
 
@@ -33,6 +34,12 @@ clean:
 fclean:		clean
 			rm -rf $(NAME)
 			$(MAKE) fclean -C libmini
+
+readline:
+			brew install readline
+
+readline_uninstall:
+			brew uninstall readline
 
 re:			fclean all
 

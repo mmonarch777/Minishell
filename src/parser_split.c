@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_split.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/11 19:05:36 by mmonarch          #+#    #+#             */
+/*   Updated: 2022/06/11 19:05:37 by mmonarch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "minishell.h"
 
 int split_output_file(t_shell *mshell, int *i)
@@ -23,7 +36,7 @@ int split_output_file(t_shell *mshell, int *i)
     return (0);
 }
 
-int split_input_file(t_shell *mshell, int *i)
+int	split_input_file(t_shell *mshell, int *i)
 {
     if (mshell->lstcom->input_file != NULL)
     {
@@ -42,7 +55,7 @@ int split_input_file(t_shell *mshell, int *i)
     return (0);
 }
 
-int split_here_document(t_shell *mshell, int *i)
+int	split_here_document(t_shell *mshell, int *i)
 {
     char	*buf;
 
@@ -69,19 +82,19 @@ int split_here_document(t_shell *mshell, int *i)
     return (0);
 }
 
-int split_input(t_shell *mshell, int *i)
+int	split_input(t_shell *mshell, int *i)
 {
-    char *buf;
+	char	*buf;
 
-    buf = NULL;
-    expand_com(mshell, i);
-    while (mshell->input[*i] == ' ' || mshell->input[*i] == '\t'
-        && mshell->input[*i])
-        (*i)++;
-    if (mshell->input[*i] != '\0')
-        buf = ft_strdup(mshell->input + *i);
-    free(mshell->input);
-    *i = -1;
-    mshell->input = buf;
-    return (0);
+	buf = NULL;
+	expand_com(mshell, i);
+	while ((mshell->input[*i] == ' ' || mshell->input[*i] == '\t')
+		&& mshell->input[*i])
+		(*i)++;
+	if (mshell->input[*i] != '\0')
+		buf = ft_strdup(mshell->input + *i);
+	free(mshell->input);
+	*i = -1;
+	mshell->input = buf;
+	return (0);
 }

@@ -10,7 +10,7 @@ include_directories(./include)
 
 link_directories(${CMAKE_SOURCE_DIR}/libmini)
 
-link_directories(/usr/lib/x86_64-linux-gnu)
+link_directories(/Users/${USER}/.brew/Cellar/readline/8.1/lib/)
 
 add_executable(minishell ${FC})
 
