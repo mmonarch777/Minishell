@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:02:24 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/12 09:08:21 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/12 18:43:56 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	close_fd(t_shell *mshell)
 	if (mshell->lstcom->token == PIPE)
 	{
 		dup2(mshell->lstcom->fd_pipe[0], 0);
+		dup2(mshell->fd1, 1);
 		close (mshell->lstcom->fd_pipe[1]);
 	}
 	else
@@ -93,7 +94,7 @@ void	comply(t_shell *mshell)
 				break ;
 		}
 		close_fd(mshell);
-		if (g_last_exit_status != 0 || mshell->lstcom->next == NULL)
+		if (mshell->lstcom->next == NULL)
 			break ;
 		mshell->lstcom = mshell->lstcom->next;
 	}

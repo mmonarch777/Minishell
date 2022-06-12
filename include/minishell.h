@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 10:21:46 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/12 10:42:57 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:10:40 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_command
 
 typedef struct s_shell
 {
-	char		*input;
 	char		*time_input;
+	char		*input;
 	int			have_pipe;
 	int			fd0;
 	int			fd1;

@@ -82,7 +82,7 @@ int	check_syntax_qoute(t_shell *mshell, int j)
 				while (mshell->input[j] != '\0' && mshell->input[j] != '\'')
 					++j;
 				if (mshell->input[j] == '\0')
-					return (syntax_error(mshell, '\''));
+					return (syntax_error(mshell, '\0'));
 			}
 			else
 			{
@@ -90,7 +90,7 @@ int	check_syntax_qoute(t_shell *mshell, int j)
 				while (mshell->input[j] != '\0' && mshell->input[j] != '\"')
 					++j;
 				if (mshell->input[j] == '\0')
-					return (syntax_error(mshell, '\"'));
+					return (syntax_error(mshell, '\0'));
 			}
 		}
 		++j;

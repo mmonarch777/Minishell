@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:03:28 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/11 19:25:41 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:24:38 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **env)
 		if (mshell.input)
 			free(mshell.input);
 		signal(SIGINT, ctrl_c);
-		mshell.input = readline("\e[0;32mminishell$\e[0;39m ");
+		mshell.input = readline("minishell$ ");
 		if (!mshell.input)
 			eof_input();
 		if (!check_mshell_input(mshell.input))

@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:01:23 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/11 20:14:49 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:03:54 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,64 @@ int	error_valid(t_shell *mshell, char *mass)
 	return (1);
 }
 
-int	check_dup_and_valid(t_shell *mshell, char *mass)
+int	check_valid(t_shell *mshell, char *mass, int i)
 {
-	t_env	*env;
-	int		i;
-
-	env = mshell->environment;
-	i = 0;
 	while (mass[i] != '\0')
 	{
 		if (i == 0)
 		{
 			if (!(ft_isalpha(mass[i]) || mass[i] == '_'))
-				return (error_valid(mshell, mass));
+			{
+				error_valid(mshell, mass);
+				return (0);
+			}
 		}
-		else if (!(ft_isalnum(mass[i]) || mass[i] == '_' || mass[i] == '='))
-			return (error_valid(mshell, mass));
+		else if (mass[i] == '=')
+			break ;
+		else if (!(ft_isalnum(mass[i]) || mass[i] == '_'))
+		{
+			error_valid(mshell, mass);
+			return (0);
+		}
 		++i;
 	}
+	return (i);
+}
+
+void	double_free(char **key, char **value)
+{
+	if (key != NULL)
+		free(*key);
+	if (key != NULL)
+		free(*value);
+}
+
+int	check_dup_and_valid(t_shell *mshell, char *mass)
+{
+	t_env	*env;
+	char	*key;
+	char	*value;
+	int		i;
+
+	env = mshell->environment;
+	i = check_valid(mshell, mass, 0);
+	if (i == 0)
+		return (1);
+	key = ft_substr(mass, 0, i);
+	value = ft_strdup(mass + i + 1);
 	while (env)
 	{
-		if (!ft_strcmp(env->key, mass))
+		if (!ft_strcmp(env->key, key))
+		{
+			free(key);
+			if (env->value != NULL)
+				free(env->value);
+			env->value = value;
 			return (1);
+		}
 		env = env->next;
 	}
+	double_free(&key, &value);
 	return (0);
 }
 

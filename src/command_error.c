@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:00:40 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/11 19:05:54 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:53:48 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	error_execve(t_shell *mshell, char *com)
 	struct stat	buff;
 
 	(void)mshell;
+	ft_putstr_fd("minishell: ", 2);
 	if (!stat(com, &buff) && S_ISDIR(buff.st_mode))
 	{
 		ft_putstr_fd(com, 2);

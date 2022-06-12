@@ -6,7 +6,7 @@
 /*   By: mmonarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 19:01:02 by mmonarch          #+#    #+#             */
-/*   Updated: 2022/06/11 19:54:53 by mmonarch         ###   ########.fr       */
+/*   Updated: 2022/06/12 14:19:49 by mmonarch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	found_print(t_env **env, t_env **print, int count, int not_big_alpha)
 			if (ft_strcmp((*print)->key, (*env)->key) > 0 && !(*env)->flag)
 				(*print) = (*env);
 			if (not_big_alpha >= count && !(*env)->flag
-				&& ft_strcmp((*print)->key, (*env)->key))
+				&& ft_strcmp((*print)->key, (*env)->key) > 0)
 				(*print) = (*env);
 			(*env) = (*env)->next;
 		}
@@ -57,7 +57,7 @@ void	check_print(t_env **env, t_env **print, int count, int not_big_alpha)
 	while (count > 0)
 	{
 		(*print) = (*env);
-		if (!(*env)->flag)
+		if ((*env)->flag == 0)
 		{
 			found_print(env, print, count, not_big_alpha);
 			print_env(env, print, &head, &count);

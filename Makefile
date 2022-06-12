@@ -11,7 +11,7 @@ SRC    =	src/minishell.c		src/env.c					src/env_list.c			src/mshell_error.c\
 OBJ    =	$(SRC:.c=.o)
 HEADER =	include/minishell.h
 CC     =	gcc
-CFLAGS =	-Wall -Wextra -Werror
+#CFLAGS =	-Wall -Wextra -Werror
 LIBA   =   libmini/libmini.a
 
 
