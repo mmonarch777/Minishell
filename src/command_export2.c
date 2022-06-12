@@ -18,11 +18,11 @@ int	error_valid(t_shell *mshell, char *mass)
 
 	command = mshell->lstcom->command[0];
 	write(2, "minishell: ", 11);
-	write(2, command,ft_strlen(command));
+	write(2, command, ft_strlen(command));
 	write(2, ": `", 3);
 	write(2, mass, ft_strlen(mass));
 	write(2, "': not a valid identifier\n", 26);
-	last_exit_status = 1;
+	g_last_exit_status = 1;
 	return (1);
 }
 

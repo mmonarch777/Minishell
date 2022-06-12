@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void 	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	nb;
 	unsigned int	na;
@@ -32,9 +32,9 @@ void 	ft_putnbr_fd(int n, int fd)
 	}
 	while (nb != 0)
 	{
-		i = n /nb + 48;
+		i = n / nb + 48;
 		write(fd, &i, 1);
 		n = n % nb;
-		nb = nb /10;
+		nb = nb / 10;
 	}
 }

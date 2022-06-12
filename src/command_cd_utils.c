@@ -38,7 +38,7 @@ void	check_oldpwd_env(t_shell *mshell)
 	env = mshell->environment;
 	while (env)
 	{
-		if (!ft_strcmp(env->value, "OLDPWD"))
+		if (!ft_strcmp(env->key, "OLDPWD"))
 			return ;
 		env = env->next;
 	}

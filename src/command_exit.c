@@ -48,7 +48,7 @@ int	my_exit(t_shell *mshell)
 			else if (mshell->lstcom->command[2] != NULL)
 			{
 				write(2, "minishell: exit: too many arguments\n", 36);
-				last_exit_status = 1;
+				g_last_exit_status = 1;
 				return (0);
 			}
 			exit(ft_atoi(mshell->lstcom->command[1]));

@@ -79,7 +79,7 @@ void	delite_env(t_shell *mshell, char **com)
 			++i;
 			continue ;
 		}
-		delite_from_env(mshell, NULL,  com[i]);
+		delite_from_env(mshell, NULL, com[i]);
 		++i;
 	}
 }
@@ -88,7 +88,7 @@ int	my_unset(t_shell *mshell)
 {
 	if (!ft_strcmp(mshell->lstcom->command[0], "unset"))
 	{
-		last_exit_status = 0;
+		g_last_exit_status = 0;
 		if (mshell->lstcom->command[1] != NULL)
 			delite_env(mshell, mshell->lstcom->command);
 		return (0);

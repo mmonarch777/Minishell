@@ -41,7 +41,7 @@ int	my_echo(t_shell *mshell)
 		}
 		if (i == 1)
 			write(1, "\n", 1);
-		last_exit_status = 0;
+		g_last_exit_status = 0;
 		return (0);
 	}
 	return (1);

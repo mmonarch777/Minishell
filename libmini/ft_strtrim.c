@@ -26,7 +26,7 @@ static	int	ft_rav(const char *set, char c)
 	return (0);
 }
 
-char 	*ft_strtrim(const char *s, const char *set)
+char	*ft_strtrim(const char *s, const char *set)
 {
 	char	*mass;
 	int		i;

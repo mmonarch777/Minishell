@@ -49,7 +49,7 @@ int	swap_pwd(t_shell *mshell)
 	chenge_value_pwd(mshell, &new, "OLDPWD");
 	chenge_value_pwd(mshell, &old, "PWD");
 	ft_putendl_fd(old, 1);
-	last_exit_status = 0;
+	g_last_exit_status = 0;
 	return (0);
 }
 
@@ -72,7 +72,7 @@ int	get_home_pwd(t_shell *mshell)
 	check_oldpwd_env(mshell);
 	chenge_value_pwd(mshell, &old, "OLDPWD");
 	chenge_value_pwd(mshell, &home, "PWD");
-	last_exit_status = 0;
+	g_last_exit_status = 0;
 	return (0);
 }
 
@@ -95,7 +95,7 @@ int	chenge_pwd(t_shell *mshell)
 	check_oldpwd_env(mshell);
 	chenge_value_pwd(mshell, &old, "OLDPWD");
 	chenge_value_pwd(mshell, &new, "PWD");
-	last_exit_status = 0;
+	g_last_exit_status = 0;
 	return (0);
 }
 

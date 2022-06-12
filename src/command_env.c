@@ -16,7 +16,7 @@ int	my_env(t_shell *mshell)
 {
 	t_env	*env;
 
-	if (!strcmp(mshell->lstcom->command[0], "env"))
+	if (!ft_strcmp(mshell->lstcom->command[0], "env"))
 	{
 		env = mshell->environment;
 		while (env)
@@ -31,7 +31,7 @@ int	my_env(t_shell *mshell)
 			}
 			env = env->next;
 		}
-		last_exit_status = 0;
+		g_last_exit_status = 0;
 		return (0);
 	}
 	return (1);

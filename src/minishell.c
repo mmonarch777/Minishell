@@ -56,7 +56,7 @@ void	init_mshell(t_shell *mshell)
 	mshell->input = NULL;
 	mshell->time_input = NULL;
 	mshell->have_pipe = 0;
-	last_exit_status = 0;
+	g_last_exit_status = 0;
 	chenge_signal();
 }
 

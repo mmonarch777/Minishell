@@ -6,7 +6,7 @@ SRC    =	src/minishell.c		src/env.c					src/env_list.c			src/mshell_error.c\
 			src/parser_quote.c	src/mshell_signal.c			src/comply_com.c		src/command_pwd.c\
 			src/command_echo.c	src/command_error.c			src/command_cd.c		src/command_cd_utils.c\
 			src/command_env.c	src/command_export.c		src/command_export2.c	src/command_unset.c\
-			src/command_exit.c	src/comply_com2.c
+			src/command_exit.c	src/comply_com2.c			src/comply_execve.c
 
 OBJ    =	$(SRC:.c=.o)
 HEADER =	include/minishell.h
@@ -18,7 +18,7 @@ LIBA   =   libmini/libmini.a
 all:		$(NAME)
 
 $(NAME):	$(OBJ) $(LIBA)
-			$(CC) $(CFLAGS) $(OBJ) -Llibmini -lmini -lreadline -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJ) -Llibmini -lmini -lreadline  -o $(NAME)
 
 
 %.o: %.c  $(LIBA) $(HEADER)
@@ -35,12 +35,13 @@ fclean:		clean
 			rm -rf $(NAME)
 			$(MAKE) fclean -C libmini
 
+norm:
+			make norm -C libmini
+			norminette $(SRC) $(HEADER)
+
 readline:
 			brew install readline
 
-readline_uninstall:
-			brew uninstall readline
-
 re:			fclean all
 
-.PHONY:		all clean fclean re bonus readline readline_uninstall
+.PHONY:		all clean norm fclean re readline

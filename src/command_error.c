@@ -22,7 +22,7 @@ int	error_directory(t_shell *mshell, char **old)
 	}
 	else
 		perror(mshell->lstcom->command[1]);
-	last_exit_status = 1;
+	g_last_exit_status = 1;
 	return (0);
 }
 
@@ -30,7 +30,7 @@ int	error_getcwd(t_shell *mshell)
 {
 	(void)mshell;
 	perror("minishell: cd");
-	last_exit_status = 1;
+	g_last_exit_status = 1;
 	return (0);
 }
 
@@ -40,7 +40,7 @@ int	error_set_pwd(t_shell *mshell, char *pwd)
 	write(2, "minishell: cd: ", 15);
 	write(2, pwd, ft_strlen(pwd));
 	write(2, " not set\n", 9);
-	last_exit_status = 1;
+	g_last_exit_status = 1;
 	return (0);
 }
 
@@ -48,7 +48,7 @@ int	error_too_many_arguments(t_shell *mshell)
 {
 	(void)mshell;
 	write(2, "minishell: cd: too many arguments\n", 34);
-	last_exit_status = 1;
+	g_last_exit_status = 1;
 	return (0);
 }
 
